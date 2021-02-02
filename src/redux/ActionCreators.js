@@ -99,3 +99,10 @@ export const setCurrency = (currency) => ({
           symbol: CURRENCIES_SYMBOLS[currency]
      }
 });
+
+export const setNameFilter = (filter) => ({
+    type: ActionTypes.SET_NAME_FILTER,
+    payload: {
+        name: filter
+    }
+})
