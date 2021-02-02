@@ -1,10 +1,12 @@
 import * as ActionTypes from "../ActionTypes";
 
 const initialState = {
-    name: null,
-    stars: null,
-    price: null,
-    rating: null,
+    name: '',
+    stars: '',
+    minPrice: '',
+    maxPrice: '',
+    minRating: '',
+    maxRating: '',
 };
 
 export const filter = (state = initialState, action) => {
@@ -23,18 +25,32 @@ export const filter = (state = initialState, action) => {
                 stars,
             };
 
-        case ActionTypes.SET_PRICE_FILTER:
-            const { price } = action.payload;
+        case ActionTypes.SET_MIN_PRICE_FILTER:
+            const { minPrice } = action.payload;
             return {
                 ...state,
-                price,
+                minPrice,
             };
 
-        case ActionTypes.SET_RATING_FILTER:
-            const { rating } = action.payload;
+        case ActionTypes.SET_MAX_PRICE_FILTER:
+            const { maxPrice } = action.payload;
             return {
                 ...state,
-                rating,
+                maxPrice,
+            };
+
+        case ActionTypes.SET_MIN_RATING_FILTER:
+            const { minRating } = action.payload;
+            return {
+                ...state,
+                minRating,
+            };
+
+        case ActionTypes.SET_MAX_RATING_FILTER:
+            const { maxRating } = action.payload;
+            return {
+                ...state,
+                maxRating,
             };
 
         default:

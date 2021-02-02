@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getHotelById } from '../redux/selectors';
+import { getHotelById } from '../redux/selectors/hotels';
 import { Card, Row, Col } from 'react-bootstrap';
 import HotelDetails from './HotelDetails';
 import BookingDetails from './BookingDetails';

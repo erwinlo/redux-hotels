@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getHotelById } from '../redux/selectors';
+import { getHotelById } from '../redux/selectors/hotels';
 import { Row, Col, Badge } from 'react-bootstrap';
 import Competitors from './Competitors';
 

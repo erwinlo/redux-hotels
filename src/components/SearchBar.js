@@ -1,60 +1,129 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import { setNameFilter } from "../redux/ActionCreators";
-import { getNameFilter } from "../redux/selectors";
+import { Form, Col, Dropdown, DropdownButton } from "react-bootstrap";
+import {
+    setNameFilter,
+    setStarsFilter,
+    setMinPriceFilter,
+    setMaxPriceFilter,
+    setMinRatingFilter,
+    setMaxRatingFilter,
+} from "../redux/actionCreators/filter";
+import {
+    getNameFilter,
+    getStarsFilter,
+    getMinPriceFilter,
+    getMaxPriceFilter,
+    getMinRatingFilter,
+    getMaxRatingFilter,
+} from "../redux/selectors/filter";
 
-class SearchBar extends Component {
-    render() {
-        return (
-            <Row>
+function SearchBar(props) {
+    return (
+        <Form>
+            <Form.Row>
                 <Col>
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                            placeholder="Search Title"
-                            onChange={(e) =>
-                                this.props.setNameFilter(e.target.value)
-                            }
-                            value={this.props.nameFilter}
-                        />
-                    </Form.Group>
+                    <Form.Control
+                        type="text"
+                        placeholder="Search Title"
+                        onChange={(e) => props.setNameFilter(e.target.value)}
+                        value={props.nameFilter}
+                    />
                 </Col>
                 <Col>
-                    <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Stars"
-                    >
-                        <Dropdown.Item href="#/action-1">1</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                            2
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">
-                            3
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">
-                            4
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">
-                            5
-                        </Dropdown.Item>
+                    <DropdownButton id="stars-selector" title="Stars">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <Dropdown.Item
+                                key={star}
+                                active={star === props.starsFilter}
+                                onClick={() => props.setStarsFilter(star)}
+                            >
+                                {star}
+                            </Dropdown.Item>
+                        ))}
                     </DropdownButton>
                 </Col>
-            </Row>
-        );
-    }
+                <Col>
+                    <Form.Control
+                        type="number"
+                        placeholder="Min. Price"
+                        onChange={(e) =>
+                            props.setMinPriceFilter(e.target.value)
+                        }
+                        value={props.minPrice}
+                    />
+                </Col>
+                <Col>
+                    <Form.Control
+                        type="number"
+                        placeholder="Max. Price"
+                        onChange={(e) =>
+                            props.setMaxPriceFilter(e.target.value)
+                        }
+                        value={props.maxPrice}
+                    />
+                </Col>
+                <Col>
+                    <Form.Control
+                        type="number"
+                        placeholder="Min. Rating"
+                        onChange={(e) =>
+                            props.setMinRatingFilter(e.target.value)
+                        }
+                        value={props.minRating}
+                    />
+                </Col>
+                <Col>
+                    <Form.Control
+                        type="number"
+                        placeholder="Max. Rating"
+                        onChange={(e) =>
+                            props.setMaxRatingFilter(e.target.value)
+                        }
+                        value={props.maxRating}
+                    />
+                </Col>
+            </Form.Row>
+        </Form>
+    );
 }
 
 const mapStateToProps = (state) => {
     const nameFilter = getNameFilter(state);
-    return { nameFilter };
+    const starsFilter = getStarsFilter(state);
+    const minPrice = getMinPriceFilter(state);
+    const maxPrice = getMaxPriceFilter(state);
+    const minRating = getMinRatingFilter(state);
+    const maxRating = getMaxRatingFilter(state);
+    return {
+        nameFilter,
+        starsFilter,
+        minPrice,
+        maxPrice,
+        minRating,
+        maxRating,
+    };
 };
 
 const mapDispatchToProps = (dispatch) => ({
     setNameFilter: (filter) => {
         dispatch(setNameFilter(filter));
     },
+    setStarsFilter: (filter) => {
+        dispatch(setStarsFilter(filter));
+    },
+    setMinPriceFilter: (filter) => {
+        dispatch(setMinPriceFilter(filter));
+    },
+    setMaxPriceFilter: (filter) => {
+        dispatch(setMaxPriceFilter(filter));
+    },
+    setMinRatingFilter: (filter) => {
+        dispatch(setMinRatingFilter(filter));
+    },
+    setMaxRatingFilter: (filter) => {
+        dispatch(setMaxRatingFilter(filter));
+    },
 });
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

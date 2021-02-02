@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
-import {
-    getHotelsState,
-    areHotelsLoading,
-    getPricesState,
-    getHotelByFilter,
-    getFilterState
-} from "./redux/selectors";
-import { fetchHotels, fetchPrices, setCurrency } from "./redux/ActionCreators";
+import { areHotelsLoading, getHotelsByFilter } from "./redux/selectors/hotels";
+import { getPricesState } from "./redux/selectors/prices";
+import { getFilterState } from "./redux/selectors/filter";
+import { setCurrency } from "./redux/actionCreators/currency";
+import { fetchHotels } from "./redux/actionCreators/hotels";
+import { fetchPrices } from "./redux/actionCreators/prices";
 import CurrencySelector from "./components/CurrencySelector";
 import HotelCard from "./components/HotelCard";
 import SearchBar from "./components/SearchBar";
 
 const mapStateToProps = (state) => {
-    const filter = getFilterState(state)
-    const hotels = getHotelByFilter(state, filter);
+    const filter = getFilterState(state);
+    const hotels = getHotelsByFilter(state, filter);
     const hotelsLoading = areHotelsLoading(state);
     const prices = getPricesState(state);
     return { hotels, hotelsLoading, prices };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { isPriceLoading } from '../redux/selectors';
+import { isPriceLoading } from '../redux/selectors/prices';
 import { Row, Col, Button, Spinner } from 'react-bootstrap';
 import OurPrice from './OurPrice';
 
